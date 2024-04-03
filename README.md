@@ -7,7 +7,8 @@
 </details>
 
 # `1. Khai báo biến`
-
-!(https://preview.redd.it/2rxjxqw43qw41.png?width=1080&crop=smart&auto=webp&s=717464c5dca4767ef4a67c67a4723e8e7dbc3fb2)
+<h1 align="center">
+  <img src="https://preview.redd.it/2rxjxqw43qw41.png?width=1080&crop=smart&auto=webp&s=717464c5dca4767ef4a67c67a4723e8e7dbc3fb2"/>
+</h1>
 
 
