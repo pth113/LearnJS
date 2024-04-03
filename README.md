@@ -127,5 +127,5 @@ console.log(foo.bas);
 **Output: 123**
 
 # `4. Prototype`
-# 1. __proto__ và prototype
-test
+### 4.1. __proto__ và prototype
+
