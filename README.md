@@ -15,6 +15,11 @@
     <a href="#3-tất-cả-đối-tượng-đều-là-tham-chiếu">3. Tất cả đối tượng đều là tham chiếu</a>
   </summary>
 </details>
+<details>
+  <summary>
+    <a href="#4-prototype">4. Prototype</a>
+  </summary>
+</details>
 
 # `1. Khai báo biến`
 <img src="https://preview.redd.it/2rxjxqw43qw41.png?width=1080&crop=smart&auto=webp&s=717464c5dca4767ef4a67c67a4723e8e7dbc3fb2" width="400px"/>
@@ -36,7 +41,7 @@ console.log(a1,a2,a3);
 
 Với reassign thì sẽ thay đổi biến global(với const thì không reassign được)
 
-Vì var có thể đổi được giá trị trong block scope khi khai báo lại nên nên biến đó ở global là **let** hay **const** thì khai báo lại var sẽ bị lỗi
+Vì var có thể đổi được giá trị trong block scope khi khai báo lại nên tên biến đó ở global là **let** hay **const** thì khai báo lại var sẽ bị lỗi
 Ví dụ:
 ```
 var a1 = 1;
@@ -70,7 +75,7 @@ console.log(add); // 17
 ```
 Function khai báo xong chạy luôn
 ```
-(function add(num1,num2){
+(function (num1,num2){
     let sum = num1+num2; 
     console.log(sum); //17
 })(8,9);
@@ -121,3 +126,6 @@ console.log(foo.bas);
 ```
 **Output: 123**
 
+# `4. Prototype`
+# 4.1 __proto__ và prototype
+test
