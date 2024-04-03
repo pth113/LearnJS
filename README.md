@@ -92,3 +92,5 @@ var add = Function('num1','num2','num1++;return num1+num2');
 let res = add (7,8);
 console.log(res); // 16
 ```
+
+Hàm không có return hoặc dùng return; thì sẽ trả về undefined
