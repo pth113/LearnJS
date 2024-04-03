@@ -10,11 +10,15 @@
     <a href="#2-các-cách-khai-báo-function">2. Các cách khai báo function</a>
   </summary>
 </details>
-
+<details>
+  <summary>
+    <a href="#3-tất-cả-đối-tượng-đều-là-tham-chiếu">3. Tất cả đối tượng đều là tham chiếu</a>
+  </summary>
+</details>
 
 # `1. Khai báo biến`
 <img src="https://preview.redd.it/2rxjxqw43qw41.png?width=1080&crop=smart&auto=webp&s=717464c5dca4767ef4a67c67a4723e8e7dbc3fb2" width="400px"/>
-Bảng trên áp dụng khi khai báo lại cú pháp với tên biến trùng với global, còn việc set lại giá trị(không khai báo mới) thì ngoài const không được set, **let** và **var** set lại là biến global sẽ bị thay đổi
+
 Ví dụ khi khi khai báo lại tên biến trong block scope
 
 ```
@@ -29,6 +33,8 @@ const a3 = 3;
 console.log(a1,a2,a3);
 ```
 **Output: 4 2 3**
+
+Với reassign thì sẽ thay đổi biến global(với const thì không reassign được)
 
 Vì var có thể đổi được giá trị trong block scope khi khai báo lại nên nên biến đó ở global là **let** hay **const** thì khai báo lại var sẽ bị lỗi
 Ví dụ:
@@ -94,3 +100,24 @@ console.log(res); // 16
 ```
 
 Hàm không có return hoặc dùng return; thì sẽ trả về undefined
+
+# `3. Tất cả đối tượng đều là tham chiếu`
+Trong JS tất cả object đều sử dụng tham chiếu
+Ví dụ
+```
+var foo = {bas: 123};
+var bar = foo;
+bar.bas = 456;
+console.log(foo.bas);
+```
+**Output: 456**
+
+Muốn copy object thì phải làm như vậy
+```
+var foo = {bas: 123};
+var bar = {bas: foo.bas};
+bar.bas = 456;
+console.log(foo.bas);
+```
+**Output: 123**
+
