@@ -21,7 +21,7 @@
   </summary>
 </details>
 
-# `1. Khai báo biến`
+## `1. Khai báo biến`
 <img src="https://preview.redd.it/2rxjxqw43qw41.png?width=1080&crop=smart&auto=webp&s=717464c5dca4767ef4a67c67a4723e8e7dbc3fb2" width="400px"/>
 
 Ví dụ khi khi khai báo lại tên biến trong block scope
@@ -55,8 +55,8 @@ const a3 = 3;
 ```
 **Error: Uncaught SyntaxError: Identifier 'a3' has already been declared**
 
-# `2. Các cách khai báo function`
-## 2.1 Khai báo tường minh
+## `2. Các cách khai báo function`
+### 2.1 Khai báo tường minh
 ```
 function Add(num1,num2){
     let sum = num1+ num2; 
@@ -65,7 +65,7 @@ function Add(num1,num2){
 let res = Add(7,8);
 console.log(res); // 15
 ``` 
-## 2.2 Khai báo khuyết danh
+### 2.2 Khai báo khuyết danh
 ```
 let add = function (num1,num2){
     let sum = num1+ num2; 
@@ -80,7 +80,7 @@ Function khai báo xong chạy luôn
     console.log(sum); //17
 })(8,9);
 ```
-## 2.3 Khai báo arrow function
+### 2.3 Khai báo arrow function
 ```
 var add = (num1, num2)=> num1+num2; 
 let res = add(5,2);
@@ -97,7 +97,7 @@ let greet = () => {
     console.log('QuangTV');
 }
 ```
-## 2.4 Khai báo function constructor
+### 2.4 Khai báo function constructor
 ```
 var add = Function('num1','num2','num1++;return num1+num2');
 let res = add (7,8);
@@ -106,7 +106,7 @@ console.log(res); // 16
 
 Hàm không có return hoặc dùng return; thì sẽ trả về undefined
 
-# `3. Tất cả đối tượng đều là tham chiếu`
+## `3. Tất cả đối tượng đều là tham chiếu`
 Trong JS tất cả object đều sử dụng tham chiếu
 Ví dụ
 ```
@@ -126,6 +126,45 @@ console.log(foo.bas);
 ```
 **Output: 123**
 
-# `4. Prototype`
+## `4. Prototype`
 ### 4.1. __proto__ và prototype
+**__proto__** là thuộc tính đặc biệt, tất cả đối tượng, function đều có thuộc tính này
+**prototype** là đối tượng đặc biệt, tất cả function đều có đối tượng này, vì cũng là đối tượng nên nó cũng có thuộc tính **__proto__**
 
+Ví dụ tìm hiểu về **__proto__**
+```
+var test_obj = {};
+test_obj.__proto__;
+  | Object
+    | __proto__ : null
+```
+
+Biến trên sẽ tham chiếu tới đối tượng root Object, vì là đối tượng nên Object cũng có thuộc tính **__proto__** thuộc tính này ban đầu trỏ tới null
+Vì là đối tượng nên sẽ không có thuộc tính prototype
+```
+var test_obj = {};
+test_obj.prototype;
+```
+**Output: undefined** 
+
+Ví dụ tìm hiểu về **prototype**
+```
+function test_func() {}
+test_func.prototype;
+  | __proto__
+    |  Object
+      | __proto__ : null
+```
+Vì là function nên cũng có thuộc tính __proto__ và thuộc tính này trỏ thẳng đến __proto__ của Object
+```
+function test_func() {}
+test_func.__proto__;
+```
+**Output: nativecode** Đây chính là __proto__ của root Object
+
+### 4.2. Prototype chain
+Trong JS tất cả đối tượng đều kế thừa đối tượng Object
+Ví dụ
+```
+
+```
