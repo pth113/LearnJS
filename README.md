@@ -44,7 +44,7 @@
 ## `1. Khai báo biến`
 <img src="https://preview.redd.it/2rxjxqw43qw41.png?width=1080&crop=smart&auto=webp&s=717464c5dca4767ef4a67c67a4723e8e7dbc3fb2" width="400px"/>
 
-Ví dụ khi khi khai báo lại tên biến trong block scope
+Ví dụ khi khai báo lại tên biến trong block scope
 
 ```
 var a1 = 1;
@@ -147,7 +147,7 @@ console.log(foo.bas);
 **Output: 123**
 
 ## `4. Prototype`
-### 4.1. __proto__ và prototype
+### 4.1. \_\_proto\_\_ và prototype
 **__proto__** là thuộc tính đặc biệt, tất cả đối tượng đều có thuộc tính này
 **prototype** là đối tượng đặc biệt, tất cả function đều có đối tượng này, vì cũng là đối tượng nên nó cũng có thuộc tính **__proto__**
 
