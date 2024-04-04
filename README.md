@@ -150,9 +150,9 @@ console.log(foo.bas);
 ### 4.1. \_\_proto\_\_ và prototype
 **\_\_proto\_\_** là thuộc tính đặc biệt, tất cả đối tượng đều có thuộc tính này
 
-**prototype** là đối tượng đặc biệt, tất cả function đều có đối tượng này, vì cũng là đối tượng nên nó cũng có thuộc tính **__proto__**
+**prototype** là đối tượng đặc biệt, tất cả function đều có đối tượng này, vì cũng là đối tượng nên nó cũng có thuộc tính **\_\_proto\_\_**
 
-**Ví dụ tìm hiểu về __proto__**
+**Ví dụ tìm hiểu về \_\_proto\_\_**
 ```
 var test_obj = {};
 test_obj.__proto__;
@@ -160,7 +160,7 @@ test_obj.__proto__;
     | __proto__ : null
 ```
 
-Thuộc tính __proto__ của đối tượng chủ yếu dùng để trỏ đến prototype của function
+Thuộc tính \_\_proto\_\_ của đối tượng chủ yếu dùng để trỏ đến prototype của function
 ```
 var test_obj = {};
 function test_func() {};
@@ -170,7 +170,7 @@ test_obj.hello()
 ```
 **Output: Hello World**
 
-Khi dùng từ khóa new function thì đối tượng được tạo ra sẽ có __proto__ trỏ đến prototype của function đó
+Khi dùng từ khóa new function thì đối tượng được tạo ra sẽ có \_\_proto\_\_ trỏ đến prototype của function đó
 ```
 function Person(){}
 Person.prototype.sayHello = () => console.log('Hello');
@@ -197,12 +197,14 @@ test_func.prototype;
 ```
 Mọi đối tượng, function trong JS đều có liên kết đến prototype của Object, có thể xem function Object là gốc của mọi thể loại trong JS
 
-Tất cả function đều có thuộc tính __proto__ cùng trỏ đến native code, vì là native code nên không xem được bên trong, có thể hiểu là đây là prototype private của function, chỉ có function sử dụng chung với nhau được, đối tượng không dùng được
+Tất cả function đều có thuộc tính \_\_proto\_\_ cùng trỏ đến native code, vì là native code nên không xem được bên trong, có thể hiểu là đây là prototype private của function, chỉ có function sử dụng chung với nhau được, đối tượng không dùng được
 ```
 function test_func() {}
 test_func.__proto__;
 ```
-**Output: nativecode** Đây chính là __proto__ của root Object
+**Output: nativecode** 
+
+Đây cũng là \_\_proto\_\_ của function Object
 
 Các function dùng chung prototype private này với nhau ok
 ```
@@ -222,7 +224,7 @@ test_func_obj.hello();
 ```
 **Output: Uncaught TypeError: test_func_obj.hello is not a function**
 
-Nếu khai báo dạng function.prototype sẽ ok
+Nếu khai báo dạng function.prototype (ngầm hiểu như là public) sẽ ok
 ```
 function test_func() {}
 test_func.prototype.hello = () => console.log('Hello World')
@@ -241,9 +243,12 @@ Object.prototype.hello = () => console.log('Hello World')
 var test_func_obj = new test_func();
 test_func_obj.hello();
 ```
-Khi test_func_obj gọi function hello() thì nó xem trong object test_func_obj có key hello không, nếu không có thì nó vào __proto__ (đang trỏ tới prototype của function test_func) kiểm tra xem có không? Thấy không có thì nó vào __proto__ của function test_func (đang trỏ tới prototype của function Object) và tìm thấy key hello nên thực thi
+Khi test_func_obj gọi function hello() thì nó xem trong object test_func_obj có key hello không, nếu không có thì nó vào \_\_proto\_\_ (đang trỏ tới prototype của function test_func) kiểm tra xem có không? Thấy không có thì nó vào \_\_proto\_\_ của function test_func (đang trỏ tới prototype của function Object) và tìm thấy key hello nên thực thi
+
 Ưu điểm của prototype là tiết kiệm bộ nhớ vì dùng chung cho các function và object, không nằm trong object
+
 Bất lợi là prototype chỉ lợi cho việc đọc, không lợi cho việc ghi vì làm mất liên kết prototype chain
+
 Ví dụ:
 ```
 function foo() {}
