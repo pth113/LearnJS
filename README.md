@@ -428,12 +428,12 @@ Trong JS first-class function định nghĩa là function có thể
      arr.push(function doSomething() {})
      ```
     
-### 2. Passed as an argument to a function
+**2. Passed as an argument to a function**
     ```
     doAction(function doSomething(){});
     ```
     
-### 3. Returned from a function
+**3. Returned from a function**
    ```
    function doAction(){
      return function(msg) {
@@ -524,11 +524,6 @@ Fix như sau
 			    nodes[i].onclick = ((i) => {
 			    	return (e) => alert(i)
 			    })(i);
-          /* có thể viết
-          nodes[i].onclick = ((x) => {
-			    	return (e) => alert(x)
-			    })(i);
-          */
 			  }
 			}
 			var nodes = document.getElementsByClassName("click");
