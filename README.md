@@ -429,6 +429,7 @@ Trong JS first-class function định nghĩa là function có thể
      ```
     
 **2. Passed as an argument to a function**
+
     ```
     doAction(function doSomething(){});
     ```
