@@ -413,34 +413,36 @@ animal.checkWindow()
 ## `8. First class và closure`
 ### First-class
 Trong JS first-class function định nghĩa là function có thể
-1. Stored in a variable, object, or array
+### 1. Stored in a variable, object, or array
 
-  a. Store in a variable :
+    - Store in a variable :
     ```
     var fn = function doSomething() {}
     ```
     
-  b. Store in an object :
+    - Store in an object :
     ```
     var obj = { doSomething : function(){} }
     ```
     
-  c. Store in an array :
+    - Store in an array :
     ```
     arr.push(function doSomething() {})
     ```
     
-2. Passed as an argument to a function
+### 2. Passed as an argument to a function
     ```
     doAction(function doSomething(){});
     ```
-3. Returned from a function
-  ```
-  function doAction(){
-  return function(msg) {
-    console.log(msg);
-  }
-  ```
+    
+### 3. Returned from a function
+   ```
+   function doAction(){
+     return function(msg) {
+       console.log(msg);
+     }
+   }
+   ```
 
 ### Closure
 A closure must preserve the arguments and variables in all scopes it references
