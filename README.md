@@ -148,7 +148,8 @@ console.log(foo.bas);
 
 ## `4. Prototype`
 ### 4.1. \_\_proto\_\_ và prototype
-**__proto__** là thuộc tính đặc biệt, tất cả đối tượng đều có thuộc tính này
+**\_\_proto\_\_** là thuộc tính đặc biệt, tất cả đối tượng đều có thuộc tính này
+
 **prototype** là đối tượng đặc biệt, tất cả function đều có đối tượng này, vì cũng là đối tượng nên nó cũng có thuộc tính **__proto__**
 
 **Ví dụ tìm hiểu về __proto__**
