@@ -403,8 +403,11 @@ class Animal {
 var animal1 = new Animal();
 animal.checkWindow()
 ```
-**Output: **
+
+**Output:**
+
 **Is window:  false**
+
 **Is animal1:  true**
 
 ## `8. First class và closure`
