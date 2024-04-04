@@ -417,15 +417,15 @@ Trong JS first-class function định nghĩa là function có thể
 **1. Stored in a variable, object, or array**   
    * Store in a variable
      ```
-      var fn = function doSomething() {}
+     var fn = function doSomething() {}
      ```
    * Store in an object
      ```
-	var obj = { doSomething : function(){} }
+     var obj = { doSomething : function(){} }
      ```
    * Store in an array
      ```
-      arr.push(function doSomething() {})
+     arr.push(function doSomething() {})
      ```
     
 ### 2. Passed as an argument to a function
