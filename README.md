@@ -414,12 +414,13 @@ animal.checkWindow()
 ### First-class
 Trong JS first-class function định nghĩa là function có thể
 ### 1. Stored in a variable, object, or array
+
 	a. Store in a variable :
  
 	    ```
 	    var fn = function doSomething() {}
 	    ```
-    
+     
     	b. Store in an object :
      
 	    ```
