@@ -35,6 +35,11 @@
     <a href="#7-hiểu-về-this">7. Hiểu về this</a>
   </summary>
 </details>
+<details>
+  <summary>
+    <a href="#8-first-class-và-closure">8. First class và closure</a>
+  </summary>
+</details>
 
 ## `1. Khai báo biến`
 <img src="https://preview.redd.it/2rxjxqw43qw41.png?width=1080&crop=smart&auto=webp&s=717464c5dca4767ef4a67c67a4723e8e7dbc3fb2" width="400px"/>
@@ -392,8 +397,132 @@ class Animal {
 var animal1 = new Animal();
 animal.checkWindow()
 ```
-**
-Output: 
-Is window:  false
-Is animal1:  true
-**
+**Output: **
+**Is window:  false**
+**Is animal1:  true**
+
+## `8. First class và closure`
+### First-class
+Trong JS first-class function có nghĩa là function có thể
+1. Stored in a variable, object, or array
+  a. Store in a variable :
+    ```
+    var fn = function doSomething() {}
+    ```
+  b. Store in an object :
+    ```
+    var obj = { doSomething : function(){} }
+    ```
+  c. Store in an array :
+    ```
+    arr.push(function doSomething() {})
+    ```
+2. Passed as an argument to a function
+    ```
+    doAction(function doSomething(){});
+    ```
+3. Returned from a function
+  ```
+  function doAction(){
+  return function(msg) {
+    console.log(msg);
+  }
+  ```
+
+### Closure
+A closure must preserve the arguments and variables in all scopes it references
+Ví dụ 1:
+```
+function outside(x) {
+  function inside(y) {
+    return x + y;
+  }
+  return inside;
+}
+fn_inside = outside(3);
+result = fn_inside(5); // #=> 8
+```
+Mặc dù hàm outside đã chạy xong, nhưng vì có tính chất closure nên biến x được bảo tồn vì còn có tham chiếu của biến **result** tới **fn_inside**, trong **fn_inside** thì đang sử dụng biến x
+
+Ví dụ 2:
+```
+function say43(){
+    let num = 42;
+    let say = () => console.log(num);
+    num++;
+    return say;
+}
+var sayNum = say43();
+sayNum(); // 43
+sayNum(); // 43
+```
+num trong hàm say được bảo tồn cho đến lúc gọi, khi gọi thì tham chiếu đến num để show giá trị ra
+Biến num sẽ được bảo tồn suốt vì có sayNum tham chiếu
+Muốn gọi xong giải phóng biến num luôn thì làm thế này
+```
+function say43(){
+    let num = 42;
+    let say = () => console.log(num);
+    num++;
+    return say;
+}
+say43()();
+```
+Không có biến tham chiếu thì hàm say gọi xong thì biến num được free
+
+Ví dụ 4:
+```
+<html>
+	<body>
+		<li class="click">link 1 </li>
+		<li class="click">link 2 </li>
+		<li class="click">link 3 </li>
+		<li class="click">link 4 </li>
+		<li class="click">link 5 </li>
+		<script>
+			var add_the_handlers = function (nodes) {
+			  var i;
+			  for (i = 0; i < nodes.length; i += 1) {
+			    nodes[i].onclick = function (e) {
+			      alert(i);
+			    };
+			  }
+			};
+			var nodes = document.getElementsByClassName("click");
+			add_the_handlers(nodes);
+		</script>
+	</body>
+</html>
+```
+Kết quả alert ra 5 hết vì khi click mới tham chiếu tới biến i
+Fix như sau
+```
+<html>
+	<body>
+		<li class="click">link 1 </li>
+		<li class="click">link 2 </li>
+		<li class="click">link 3 </li>
+		<li class="click">link 4 </li>
+		<li class="click">link 5 </li>
+		<script>
+			var add_the_handlers = function (nodes) {
+			  var i;
+			  for (i = 0; i < nodes.length; i += 1) {
+			    nodes[i].onclick = ((i) => {
+			    	return (e) => alert(i)
+			    })(i);
+          /* có thể viết
+          nodes[i].onclick = ((x) => {
+			    	return (e) => alert(x)
+			    })(i);
+          */
+			  }
+			}
+			var nodes = document.getElementsByClassName("click");
+			add_the_handlers(nodes);
+		</script>
+	</body>
+</html>
+```
+Khi có tham số của function trùng tên với biến bên ngoài thì nó vẫn xem tham số đó là tham trị, không phải là tham chiếu tới biến bên ngoài
+
