@@ -759,7 +759,7 @@ Chi tiết xem tại page 120 https://docs.google.com/document/d/1sbM3gLMdbRE390
     success: result of b()
     ```
 
-## **`10. Async/Await`**
+## `10. Async/Await`
   
   Muốn dùng await trong 1 hàm, thì hàm đó phải khai báo là async. Hàm async sẽ tự động trả về là một promise
   ```
