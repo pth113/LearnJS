@@ -40,6 +40,11 @@
     <a href="#8-first-class-và-closure">8. First class và closure</a>
   </summary>
 </details>
+<details>
+  <summary>
+    <a href="#9-promise">9. Promise</a>
+  </summary>
+</details>
 
 ## `1. Khai báo biến`
 <img src="https://preview.redd.it/2rxjxqw43qw41.png?width=1080&crop=smart&auto=webp&s=717464c5dca4767ef4a67c67a4723e8e7dbc3fb2" width="400px"/>
@@ -534,3 +539,8 @@ Fix như sau
 ```
 Khi có tham số của function trùng tên với biến bên ngoài thì nó vẫn xem tham số đó là tham trị, không phải là tham chiếu tới biến bên ngoài
 
+## `9. Promise`
+Chi tiết xem tại page 120 https://docs.google.com/document/d/1sbM3gLMdbRE390vi1NUfgH8q85oJfvLlzl1QgTWCVnk/edit
+* **Promise cơ bản**
+  * **Return a new promise**
+    fwaffwa
