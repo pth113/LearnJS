@@ -542,5 +542,13 @@ Khi có tham số của function trùng tên với biến bên ngoài thì nó v
 ## `9. Promise`
 Chi tiết xem tại page 120 https://docs.google.com/document/d/1sbM3gLMdbRE390vi1NUfgH8q85oJfvLlzl1QgTWCVnk/edit
 * **Promise cơ bản**
-  * **Return a new promise**
-    fwaffwa
+  * **Return a new fulfilled promise trong các trường hợp sau**
+    * new Promise((resolve, reject) => { resolve('test1')}); hoặc Promise.resolve('test1')
+
+      Return a new fulfilled promise có payload là test1
+      ```
+      new Promise((resolve, reject) => resolve('test1'))
+      ```
+      **Output: Promise {<fulfilled>: 'test1'}**
+    * 
+
