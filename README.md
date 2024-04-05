@@ -47,7 +47,7 @@
 </details>
 <details>
   <summary>
-    <a href="#10-async/await">10. Async/Await</a>
+    <a href="#10-asyncawait">10. Async/Await</a>
   </summary>
 </details>
 
