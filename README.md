@@ -45,6 +45,12 @@
     <a href="#9-promise">9. Promise</a>
   </summary>
 </details>
+<details>
+  <summary>
+    <a href="#10-async/await">10. Async/Await</a>
+  </summary>
+</details>
+
 
 ## `1. Khai báo biến`
 <img src="https://preview.redd.it/2rxjxqw43qw41.png?width=1080&crop=smart&auto=webp&s=717464c5dca4767ef4a67c67a4723e8e7dbc3fb2" width="400px"/>
@@ -662,8 +668,136 @@ Chi tiết xem tại page 120 https://docs.google.com/document/d/1sbM3gLMdbRE390
   [3] then [1] catch payload
   [2] finally
   [4] then [3] then payload
-  Promise {\<fulfilled\>: '[4] then payload'}
+  Promise {<fulfilled>: '[4] then payload'}
   ```
     
+* **Promise.all() and Promise.race()**
+  Việc dùng promise với cách cơ bản như trên cũng không xử lý được vấn đề như callback hell
+  ```
+  const a = () => new Promise(resolve => {
+    setTimeout(() => resolve('result of a()'), 1000); // 1s delay
+  });
+  const b = () => new Promise(resolve => {
+    setTimeout(() => resolve('result of b()'), 500); // 0.5s delay
+  });
+  const c = () => new Promise(resolve => {
+    setTimeout( () => resolve('result of c()'), 1100); // 1.1s delay
+  });
 
+  // call a(), b(), and c() in series
+  a().then((result) => {
+    console.log( 'a() success:', result );
+    b().then((result) => {
+        console.log('b() success:', result);
+        c().then((result) => {
+            console.log('c() success:', result);
+        });
+    });
+  })
+  .catch((error) => {
+    console.log('a() error:', error);
+  });
+  ```
+  Muốn gọn thì phải dùng Promise với Async, còn chạy parralel thì dùng Promise.all() hoặc Promise.race()
+  * **Promise.all()**
+    ```
+    const a = () => new Promise(resolve => {
+      setTimeout(() => resolve('result of a()'), 1000); // 1s delay
+    });
+    const b = () => new Promise(resolve => {
+      setTimeout(() => resolve('result of b()'), 500); // 0.5s delay
+    });
+    const c = () => new Promise(resolve => {
+      setTimeout(() => resolve( 'result of c()'), 1100); // 1.1s delay
+    });
+
+    // resolve once a(), b(), c() resolves
+    Promise.all([a(), b(), c(), {key: 'I am plain data!'}])
+    .then((data) => {
+      console.log( 'success: ', data );
+    })
+    .catch((error) => {
+      console.log('error: ', error);
+    });
+    ```
+    Kết quả
+    ```
+    "success: ", ["result of a()", "result of b()", "result of c()", [object Object] {
+      key: "I am plain data!"
+    }]
+    ```
+    Nếu có reject thì báo lỗi, thằng nào chạy ko lỗi thì chạy hết, error chỉ báo lỗi thằng đầu tiên reject
+  * **Promise.race()**
+ 
+    Chạy parallel, thằng nào chạy xong trước/error thì báo về, lấy kết quả đó hiển thị
+    ```
+    const a = () => new Promise(resolve => {
+      setTimeout(() => resolve('result of a()'), 1000); // 1s delay
+    });
+    const b = () => new Promise(resolve => {
+      setTimeout(() => resolve('result of b()'), 500); // 0.5s delay
+    });
+    const c = () => new Promise(resolve => {
+      setTimeout(() => resolve('result of c()'), 1100); // 1.1s delay
+    });
+
+    // race a(), b(), c()
+    Promise.race([ a(), b(), c()])
+    .then((data) => {
+      console.log( 'success: ', data );
+    })
+    .catch((error) => {
+      console.log( 'error: ', error );
+    });
+    ```
+    Kết quả
+    ```
+    success: result of b()
+    ```
+    Giả sử a() reject thì vẫn thông báo là 
+    ```
+    success: result of b()
+    ```
+
+## **`10. Async/Await`**
+  
+  Muốn dùng await trong 1 hàm, thì hàm đó phải khai báo là async. Hàm async sẽ tự động trả về là một promise
+  ```
+  const a = () => new Promise(resolve=> {
+    setTimeout(() => resolve('result of a()'), 1000); // 1s delay
+  });
+  const b = () => new Promise((resolve, reject) => {
+    setTimeout(() => resolve('result of b()'), 500); // 0.5s delay
+  });
+  const c = () => new Promise(resolve => {
+    setTimeout(() => resolve('result of c()'), 1100); // 1.1s delay
+  });
+  const doJobs = async () => {
+    try {
+      var resultA = await a();
+      var resultB = await b();
+      var resultC = await c();
+      return [ resultA, resultB, resultC ];
+    } catch( error ) {
+      return [ null, null, null ];
+    }
+  };
+
+  // doJobs() returns a promise
+  doJobs().then((result) => {
+    console.log('success:', result);
+  })
+  .catch((error) => {
+    console.log('error:', error);
+  });
+
+  // normal flow
+  console.log('I am a sync operation!');
+
+  ```
+  Kết quả
+  ```
+  I am a sync operation!
+  success: ["result of a()", "result of b()", "result of c()"]
+  ```
 
