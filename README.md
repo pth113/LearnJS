@@ -550,5 +550,120 @@ Chi tiết xem tại page 120 https://docs.google.com/document/d/1sbM3gLMdbRE390
       new Promise((resolve, reject) => resolve('test1'))
       ```
       **Output: Promise {\<fulfilled\>: 'test1'}**
-    * 
+    * Trong .then((result) => {})
+
+      Return a new fulfiled promise ko có payload 
+    * Trong .then((result) => { return ‘test2’;})
+
+      Return a new fulfiled promise có payload là ‘test2’
+      
+    Các thằng .then tiếp theo trong chuỗi chỉ thực khi khi nhận ra promise là a new fulfiled promise. Nếu không nó sẽ không thực thi, mà mang có promise cho thằng tiếp theo trong chuỗi xử lý
+
+  * **Return a new rejected promise trong trường hợp sau**
+
+    new Promise((resolve, reject) => { reject('test1')}); hoặc Promise. reject('test1')
+    Return a new reject promise với payload là test1 
+    ```
+    new Promise((resolve, reject) => reject('test1'))
+    ```
+    **Output: Promise {\<rejected\>: 'test1'}**
+
+    Return a new rejected promise không có payload
+    ```
+    new Promise((resolve, reject) => reject())
+    ```
+    **Output: Promise {\<rejected\>: undefined}**
+    
+    Mấy thằng .catch phía sau chỉ bắt promise vào xử lý khi promise là a new rejected promise
+    **Lưu ý:**
+    
+    Nếu trong .catch mà return sẽ là return ra a new fulfiled promise có payload là giá trị return. 
+    Nếu trong .catch mà ko return sẽ là return ra a new fulfiled promise ko có payload.
+    ```
+    new Promise((resolve, reject) => reject()).catch(() => {})
+    ```
+    **Output: Promise {\<fulfilled\>: undefined}**
+
+    ```
+    new Promise((resolve, reject) => reject()).catch(() => { return 'test1'})
+    ```
+    **Output: Promise {\<fulfilled\>: 'test1'}**
+
+  * **Finally thì mặc kệ promise là gì thì nó cũng xử lý, xử lý xong, nó sẽ truyền promise trước nó cho thằng sau nếu có thằng sau đang đứng**
+    
+    ```
+    Promise.resolve('Reject DATA!')
+      .then(result=> {
+	console.log('[1] then', result);
+	return 'new Reject DATA!';
+      })
+      .finally(()=>{
+        console.log('[1] finally');
+	return 'return cho vui, chu ko lam gi';
+      })
+      .then(result=>{
+	console.log('[2] then: ', result);
+	return 'the end';
+      })
+    ``` 
+    Kết quả
+    ```
+    [1] then Reject DATA!
+    [1] finally
+    [2] then:  new Reject DATA!
+    ```
+
+* **Thực hành Promise**
+  
+  Cho biết kết quả đoạn code sau
+  ```
+  Promise.reject( 'Reject DATA!' )
+  .then((result) => {
+    console.log( '[1] then', result ); // won't be called
+    return '[2] then payload';
+  })
+  .finally(() => {
+    console.log( '[1] finally' ); // first finally will be called
+    return '[1] finally payload';
+  })
+  .then((result) => {
+    console.log( '[2] then', result ); // won't be called
+    return '[2] then payload';
+  })
+  .catch((error) => {
+    console.log( '[1] catch', error );  // first catch will be called
+    return '[1] catch payload';
+  })
+  .catch((error) => {
+    console.log( '[2] catch', error );  // won't be called
+    return '[2] catch payload';
+  })
+  .then((result) => {
+    console.log( '[3] then', result ); // will be called
+    return '[3] then payload';
+  })
+  .finally(() => {
+    console.log( '[2] finally' ); // will be called
+    return '[2] finally payload';
+  })
+  .catch((error) => {
+    console.log( '[3] catch', error );  // won't be called
+    return '[3] catch payload';
+  })
+  .then((result) => {
+    console.log( '[4] then', result ); // will be called
+    return '[4] then payload';
+  });
+  ```
+  Kết quả
+  ```
+  [1] finally
+  [1] catch Reject DATA!
+  [3] then [1] catch payload
+  [2] finally
+  [4] then [3] then payload
+  Promise {\<fulfilled\>: '[4] then payload'}
+  ```
+    
+
 
