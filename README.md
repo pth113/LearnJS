@@ -549,6 +549,6 @@ Chi tiết xem tại page 120 https://docs.google.com/document/d/1sbM3gLMdbRE390
       ```
       new Promise((resolve, reject) => resolve('test1'))
       ```
-      **Output: Promise {<fulfilled>: 'test1'}**
+      **Output: Promise {\<fulfilled\>: 'test1'}**
     * 
 
