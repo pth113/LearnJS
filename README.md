@@ -811,8 +811,8 @@ Tham khảo ví dụ: https://ui.dev/async-javascript-from-callbacks-to-promises
 
 ![image](https://github.com/pth113/LearnJS/assets/7723612/5817b5a1-f9f7-4275-bee3-780a81740f21)
 
-Có 3 queue là stack, micro và stack của web API
+Có 3 queue là call stack, micro và stack queue
 Thứ tự xử lý
-* Stack trong Engine LIFO
+* Call Stack trong Engine LIFO
 * Micro (Promise, ...)
-* Stack cuea web API (settimeout, fetch, ...)
+* Stack queue web API (settimeout, fetch, ...)
