@@ -1,4 +1,4 @@
-# LearnJS
+![image](https://github.com/pth113/LearnJS/assets/7723612/78455f41-0771-4cb2-82cd-73868385b726)# LearnJS
 ## Table of Contents
 <details>
   <summary>
@@ -50,7 +50,11 @@
     <a href="#10-asyncawait">10. Async/Await</a>
   </summary>
 </details>
-
+<details>
+  <summary>
+    <a href="#11-javascript-runtime-environment">11. Javascript Runtime Environment</a>
+  </summary>
+</details>
 
 ## `1. Khai báo biến`
 <img src="https://preview.redd.it/2rxjxqw43qw41.png?width=1080&crop=smart&auto=webp&s=717464c5dca4767ef4a67c67a4723e8e7dbc3fb2" width="400px"/>
@@ -801,3 +805,14 @@ Chi tiết xem tại page 120 https://docs.google.com/document/d/1sbM3gLMdbRE390
   success: ["result of a()", "result of b()", "result of c()"]
   ```
 
+Tham khảo ví dụ: https://ui.dev/async-javascript-from-callbacks-to-promises-to-async-await
+
+## `11. Javascript Runtime Environment`
+
+![image](https://github.com/pth113/LearnJS/assets/7723612/5817b5a1-f9f7-4275-bee3-780a81740f21)
+
+Có 3 queue là stack, micro và stack của web API
+Thứ tự xử lý
+* Stack trong Engine LIFO
+* Micro (Promise, ...)
+* Stack cuea web API (settimeout, fetch, ...)
