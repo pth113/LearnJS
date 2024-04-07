@@ -1,4 +1,5 @@
-![image](https://github.com/pth113/LearnJS/assets/7723612/78455f41-0771-4cb2-82cd-73868385b726)# LearnJS
+# LearnJS
+
 ## Table of Contents
 <details>
   <summary>
