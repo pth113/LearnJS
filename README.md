@@ -814,6 +814,16 @@ Tham khảo ví dụ: https://ui.dev/async-javascript-from-callbacks-to-promises
 
 Có 3 queue là call stack, micro và stack queue
 Thứ tự xử lý
+
 * Call Stack trong Engine LIFO
 * Micro (Promise, ...)
 * Stack queue web API (settimeout, fetch, ...)
+
+Có 2 loại task queue đó là macroTask Queue và microTask Queue, macroTask còn có tên gọi khác là Task Queue và microTask cũng có tên gọi là Job Queue. Hai task này nhìn chung là như nhau , những task trong Job Queue ưu tiên hơn những task có trong Task Queue. Thứ tự chạy của các task trong hai queue này như sau:
+
+Ở mỗi chu kỳ của event-loop, nó sẽ check xem call stack có rỗng không, nếu rỗng:
+
+Lấy một task cũ nhất trong Task Queue ra chạy.
+Sau khi task trong Task Queue chạy xong, event loop sẽ nhìn vào Job Queue (chứa microTask) và chạy hết tất cả các tasks trong này.
+Kết thúc chu kỳ event-loop quay lại bước 1 cho đến khi chay hết task queue.
+
